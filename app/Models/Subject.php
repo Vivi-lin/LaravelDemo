@@ -7,21 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Subject extends Model
 {
-    /**
-
-     * The attributes that are mass assignable.
-
-     *
-
-     * @var array
-
-     */
-
+    use HasFactory;
     protected $fillable = [
 
-        'content'
+        'name'
 
     ];
 
-    //use HasFactory;
+    
 }
