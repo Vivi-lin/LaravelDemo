@@ -13,5 +13,18 @@ class Post extends Model
         'content'
 
     ];
-    
+    public function subject()
+
+{
+
+    return $this->belongsTo(Subject::class);
+
+}
+    public function users()
+
+{
+
+    return $this->hasMany(User::class);
+
+}
 }
