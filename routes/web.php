@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\InspiringController;
+use App\Models\Subject;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,17 +21,17 @@ Route::get('/', function () {
 
 Route::get('/hello-world', function () {
     return view('Hello_world');
-}); 
+});
 
 Route::get('/about_us', function () {
     return view('about_us', ['name' => 'Laravel 6.0 範例']);
-}); 
+});
 
-Route::get('/inspire', 'App\Http\Controllers\InspiringController@inspire'); 
+Route::get('/inspire', 'App\Http\Controllers\InspiringController@inspire');
 
 Route::get('/test', function(){
     return App\Models\Post::all();
-}); 
+});
 
 Route::get('/edit', function(){
     $post = App\Models\Post::find(1);
@@ -38,55 +39,59 @@ Route::get('/edit', function(){
     $post->save();
     return $post;
 
-}); 
+});
 
 Route::get('/add1', function(){
     $post = new App\Models\Post;
      $post->content = 'ABCDE';
      $post->subject_id = 1;
+     $post->user_id = 1;
      $post->save();
-     return $post; 
- 
- }); 
+     return $post;
+
+ });
 
  Route::get('/add2', function(){
     $post = new App\Models\Post;
      $post->content = 'SSSSS';
      $post->subject_id = 2;
+     $post->user_id = 1;
      $post->save();
-     return $post; 
- 
- }); 
+     return $post;
+
+ });
 
  Route::get('/sub1', function(){
     $post = new App\Models\Subject;
      $post->name = 'computer';
      $post->save();
-     return $post; 
- 
- }); 
+     return $post;
+
+ });
 
  Route::get('/sub2', function(){
     $post = new App\Models\Subject;
      $post->name = 'network';
      $post->save();
-     return $post; 
- 
+     return $post;
+
  });
 
  Route::get('/get1', function(){
     $subject = Subject::find(1);
     $posts = $subject->posts;
     return $posts;
-}); 
+});
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/test', function(){
     var_dump(Auth::check());
-}); 
+});
 
 Route::get('/user', function(){
     echo Auth::user();
-});  
+});
+
+Route::resource('posts', 'App\Http\Controllers\PostController');
